@@ -20,8 +20,8 @@
 
     <!-- salasana tab -->
     <div id="salasana" class="tab-wrap">
-      <form id="login" class="VBox BoxShadow wrap-modal">
-        <div class="headline">
+      <form id="login" class="form-modal">
+        <div class="form-headline">
           <h3>Kirjaudu sisään</h3>
         </div>
 
@@ -69,93 +69,94 @@
                       tietosuojaselosteen <span class="material-icons open-in-new">open_in_new</span></a>
                     ja evästeiden käytön. Evästeitä käytetään käyttäjän autentikoimiseen istunnon aikana.
                   </div>
-
                 </label>
               </div>
             </div>
-
           </div>
-
         </div>
 
         <div class="form-action">
-          <div id="login-info" class="error-message"></div>
           <button type="submit">
             Kirjaudu
           </button>
         </div>
 
       </form>
-
     </div>
+    <!-- salasana tab end -->
 
     <!-- vaihto tab -->
     <div id="vaihto" class="tab-wrap" style="display: none;">
-      <div class="wrap-modal">
-        <div class="headline">
-          <h3>Ohje</h3>
-          <ui>
-            <li>Salasanan on oltava vähintään 8 merkkiä pitkä</li>
-            <li>Salasana voi olla enintään 10 merkkiä pitkä</li>
-            <li>Salasanassa sallitut erikoismerkit: <span class="special-charracters">$ ? * ! . , - _</span></li>
-            <li>Salasana ei voi sisältää rivinvaihtoja</li>
-            <li>Salasana ei voi sisältää sisennyksiä</li>
-            <li>Salasana ei voi sisältää välilyöntejä</li>
-          </ui>
-        </div>
-      </div>
+      <form id="change" class="form-container">
 
-      <form id="change" class="VBox BoxShadow wrap-modal">
-
-        <div class="headline">
+        <div class="form-header">
           <h3>Vaihda salasana</h3>
         </div>
 
         <div class="form-content">
-          <div id="changeFormPassword" class="HBox form-field-container full-width">
-            <div class="label-wrapper">
-              <label for="change-password">
-                Nykyinen salasana<span class="form-field-required"></span>
-              </label>
+          <div class="form-content-section direction-row">
+            <div class="form-field-container bordered">
+              <div class="label-wrapper">
+                <label>Ohje</label>
+              </div>
+              <div class="list-wrapper">
+                <ul>
+                  <li>Salasanan on oltava vähintään 8 merkkiä pitkä</li>
+                  <li>Salasana voi olla enintään 10 merkkiä pitkä</li>
+                  <li>Salasanassa sallitut erikoismerkit: <span class="special-charracters">$ ? * ! . , - _</span></li>
+                  <li>Salasana ei voi sisältää rivinvaihtoja</li>
+                  <li>Salasana ei voi sisältää sisennyksiä</li>
+                  <li>Salasana ei voi sisältää välilyöntejä</li>
+                </ul>
+              </div>
             </div>
-            <div class="input-wrapper">
-              <span class="material-icons">key</span>
-              <input id="change-password-org" type="password" name="currentPassword" required="true" autofocus="true"
-                spellcheck="false" autocomplete="current-password" placeholder="Syötä nykyinen salasana"
-                pattern="^.{1,10}$" title="Syötä nykyinen salasana">
-            </div>
-          </div>
+            <div>
+              <div id="changeFormPassword" class="form-field-container full-width">
+                <div class="label-wrapper">
+                  <label for="change-password">
+                    Nykyinen salasana<span class="form-field-required"></span>
+                  </label>
+                </div>
+                <div class="input-wrapper">
+                  <span class="material-icons">key</span>
+                  <input id="change-password-org" type="password" name="currentPassword" required="true"
+                    autofocus="true" spellcheck="false" autocomplete="current-password"
+                    placeholder="Syötä nykyinen salasana" pattern="^.{1,10}$" title="Syötä nykyinen salasana">
+                </div>
+              </div>
 
-          <div id="changeFormPassword" class="HBox form-field-container full-width">
-            <div class="label-wrapper">
-              <label for="change-password">
-                Uusi salasana<span class="form-field-required"></span>
-              </label>
-            </div>
-            <div class="input-wrapper">
-              <span class="material-icons">key</span>
-              <input id="change-password-new" type="password" name="newPassword" required="true" spellcheck="false"
-                autocomplete="new-password" placeholder="Syötä uusi salasana"
-                pattern="^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$"
-                title="Anna ohjeen mukainen salasana">
-            </div>
-          </div>
+              <div id="changeFormPassword" class="form-field-container full-width">
+                <div class="label-wrapper">
+                  <label for="change-password">
+                    Uusi salasana<span class="form-field-required"></span>
+                  </label>
+                </div>
+                <div class="input-wrapper">
+                  <span class="material-icons">key</span>
+                  <input id="change-password-new" type="password" name="newPassword" required="true" spellcheck="false"
+                    autocomplete="new-password" placeholder="Syötä uusi salasana"
+                    pattern="^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$"
+                    title="Anna ohjeen mukainen salasana">
+                </div>
+              </div>
 
-          <div id="changeFormPassword" class="HBox form-field-container full-width">
-            <div class="label-wrapper">
-              <label for="change-password">Uusi salasana uudelleen<span class="form-field-required"></label>
+              <div id="changeFormPassword" class="HBox form-field-container full-width">
+                <div class="label-wrapper">
+                  <label for="change-password">Uusi salasana uudelleen<span class="form-field-required"></label>
+                </div>
+                <div class="input-wrapper">
+                  <span class="material-icons">key</span>
+                  <input id="change-password-verify" type="password" name="newPasswordVerify" required="true"
+                    spellcheck="false" autocomplete="new-password" placeholder="Syötä uusi salasana uudelleen"
+                    pattern="^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$"
+                    title="Anna ohjeen mukainen salasana">
+                </div>
+              </div>
             </div>
-            <div class="input-wrapper">
-              <span class="material-icons">key</span>
-              <input id="change-password-verify" type="password" name="newPasswordVerify" required="true"
-                spellcheck="false" autocomplete="new-password" placeholder="Syötä uusi salasana uudelleen"
-                pattern="^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$"
-                title="Anna ohjeen mukainen salasana">
-            </div>
+
           </div>
         </div>
-
-        <div class="form-action">
+        <div class="form-footer">
           <button type="submit">
             Vaihda
           </button>
@@ -163,6 +164,7 @@
 
       </form>
     </div>
+    <!-- vaihto tab end -->
 
     <!-- For displaying info messages and errors to user -->
     {{> sharedPartials/snackbars }}

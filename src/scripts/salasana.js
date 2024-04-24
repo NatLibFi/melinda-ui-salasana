@@ -33,11 +33,10 @@ async function loginEvent(event) {
   console.log('Login submit event');
   eventHandled(event);
 
-  logininfo('');
-
   const termschecked = document.querySelector('#login #acceptterms').checked;
   if (!termschecked) {
-    logininfo('Tietosuojaselosteen ja evästeiden käytön hyväksyminen vaaditaan');
+    showSnackbar({style: 'error', text: 'Tietosuojaselosteen ja evästeiden käytön hyväksyminen vaaditaan'});
+
     return;
   }
 
@@ -48,21 +47,13 @@ async function loginEvent(event) {
   try {
     const {token} = await authRequest({username: formData.get('username'), password: formData.get('password')});
     const user = await verifyBasic(token);
-    // Cookie is set here - No need for saved account
-    console.log(user);
-
     return setTab('vaihto', user.id);
   } catch (err) {
     console.log(err);
-    logininfo('Käyttäjätunnus tai salasana on väärin');
+    showSnackbar({style: 'error', text: 'Käyttäjätunnus tai salasana on väärin'});
   } finally {
     stopProcess();
   };
-
-  function logininfo(msg) {
-    const infodiv = document.querySelector('#login-info');
-    infodiv.innerHTML = msg;
-  }
 }
 
 async function changeEvent(event) {
