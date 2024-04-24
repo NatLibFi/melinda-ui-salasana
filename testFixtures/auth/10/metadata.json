@@ -1,0 +1,6 @@
+{
+  "description": "Error on too long values",
+  "only": false,
+  "skip": false,
+  "method": "validatePassword"
+}

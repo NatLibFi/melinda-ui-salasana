@@ -1,0 +1,174 @@
+<!-- -------------------------------------------------------------------------- -->
+<!-- Salasana body -->
+<!-- -------------------------------------------------------------------------- -->
+
+<div id="bodywrapper" class="viewport-full flex-column">
+
+  <!-- ------------------------------------------------------------------------ -->
+  <!-- Navigation bar -->
+  {{> sharedPartials/navbar }}
+
+  <!-- ------------------------------------------------------------------------ -->
+  <!-- Progress bar -->
+  <div id="progressbar" class="progress-bar-inactive"></div>
+
+  <!-- ------------------------------------------------------------------------ -->
+  <!-- Application -->
+  <div id="root">
+
+    <!-- ---------------------------------------------------------------------- -->
+
+    <!-- salasana tab -->
+    <div id="salasana" class="tab-wrap">
+      <form id="login" class="VBox BoxShadow wrap-modal">
+        <div class="headline">
+          <h3>Kirjaudu sisään</h3>
+        </div>
+
+        <div class="form-content">
+
+          <div id="loginFormUsername" class="HBox form-field-container full-width">
+            <div class="label-wrapper">
+              <label for="login-username">
+                Käyttäjätunnus <span class="form-field-required"></span>
+              </label>
+            </div>
+            <div class="input-wrapper">
+              <span class="material-icons">person_outline</span>
+              <input id="login-username" type="text" name="username" required="true" autofocus="true" spellcheck="false"
+                autocomplete="username" placeholder="Syötä Melinda-tunnus" title="Käyttäjätunnus on vaadittu kenttä">
+            </div>
+          </div>
+
+          <div id="loginFormPassword" class="HBox form-field-container full-width">
+            <div class="label-wrapper">
+              <label for="login-password">Salasana<span class="form-field-required"></label>
+            </div>
+            <div class="input-wrapper">
+              <span class="material-icons">lock_outline</span>
+              <input id="login-password" type="password" name="password" required="true" spellcheck="false"
+                autocomplete="current-password" placeholder="Syötä salasana" title="Salasana on vaadittu kenttä">
+            </div>
+          </div>
+
+          <div id="loginFormAcceptTerms" class="VBox">
+
+            <div class="HBox form-field-container checkbox full-width">
+              <div class="label-wrapper">
+                <label for="acceptterms">
+
+                  <div class="input-wrapper">
+                    <input id="acceptterms" type="checkbox">
+                    <span class="material-icons"></span>
+                  </div>
+
+                  <div class="outer-link">
+                    Hyväksyn
+                    <a href="https://www.kiwi.fi/pages/viewpage.action?pageId=148177248" target="_blank"
+                      rel="noopener noreferrer" title="Avautuu uuteen välilehteen">
+                      tietosuojaselosteen <span class="material-icons open-in-new">open_in_new</span></a>
+                    ja evästeiden käytön. Evästeitä käytetään käyttäjän autentikoimiseen istunnon aikana.
+                  </div>
+
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="form-action">
+          <div id="login-info" class="error-message"></div>
+          <button type="submit">
+            Kirjaudu
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <!-- vaihto tab -->
+    <div id="vaihto" class="tab-wrap" style="display: none;">
+      <div class="wrap-modal">
+        <div class="headline">
+          <h3>Ohje</h3>
+          <ui>
+            <li>Salasanan on oltava vähintään 8 merkkiä</li>
+            <li>Salasana voi olla enintään 10 merkkiä</li>
+            <li>Salasanassa sallitut erikoismerkit: <span class="special-charracters">$ ? * ! . , - _</span></li>
+            <li>Salasanassa ei voi sisältää rivinvaihtoja</li>
+            <li>Salasanassa ei voi sisältää sisennyksiä</li>
+            <li>Salasanassa ei voi sisältää välilyöntejä</li>
+          </ui>
+        </div>
+      </div>
+
+      <form id="change" class="VBox BoxShadow wrap-modal">
+
+        <div class="headline">
+          <h3>Vaihda salasana</h3>
+        </div>
+
+        <div class="form-content">
+          <div id="changeFormPassword" class="HBox form-field-container full-width">
+            <div class="label-wrapper">
+              <label for="change-password">
+                Nykyinen salasana<span class="form-field-required"></span>
+              </label>
+            </div>
+            <div class="input-wrapper">
+              <span class="material-icons">key</span>
+              <input id="change-password-org" type="password" name="currentPassword" required="true" autofocus="true"
+                spellcheck="false" autocomplete="current-password" placeholder="Syötä nykyinen salasana"
+                pattern="^.{1,10}$" title="Syötä nykyinen salasana">
+            </div>
+          </div>
+
+          <div id="changeFormPassword" class="HBox form-field-container full-width">
+            <div class="label-wrapper">
+              <label for="change-password">
+                Uusi salasana<span class="form-field-required"></span>
+              </label>
+            </div>
+            <div class="input-wrapper">
+              <span class="material-icons">key</span>
+              <input id="change-password-new" type="password" name="newPassword" required="true" spellcheck="false"
+                autocomplete="new-password" placeholder="Syötä uusi salasana"
+                pattern="^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$"
+                title="Anna ohjeen mukainen salasana">
+            </div>
+          </div>
+
+          <div id="changeFormPassword" class="HBox form-field-container full-width">
+            <div class="label-wrapper">
+              <label for="change-password">Uusi salasana uudelleen<span class="form-field-required"></label>
+            </div>
+            <div class="input-wrapper">
+              <span class="material-icons">key</span>
+              <input id="change-password-verify" type="password" name="newPasswordVerify" required="true"
+                spellcheck="false" autocomplete="new-password" placeholder="Syötä uusi salasana uudelleen"
+                pattern="^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$"
+                title="Anna ohjeen mukainen salasana">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-action">
+          <button type="submit">
+            Vaihda
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- For displaying info messages and errors to user -->
+    {{> sharedPartials/snackbars }}
+
+  </div>
+
+  <!-- ------------------------------------------------------------------------ -->
+  <!-- Footer -->
+  {{> sharedPartials/footer }}
