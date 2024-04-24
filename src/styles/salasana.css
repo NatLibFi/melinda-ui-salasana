@@ -23,8 +23,12 @@
   list-style-type: " - ";
 }
 
-.form-content .special-charracters {
+.form-field-container .list-wrapper .special-charracters {
   color: var(--color-functional-red);
+}
+
+.form-field-container .label-wrapper label {
+  margin-top: 10px;
 }
 
 .form-footer {
