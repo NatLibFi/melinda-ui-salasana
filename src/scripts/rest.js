@@ -33,7 +33,6 @@ async function doRestCall({url = undefined, method = undefined, body = undefined
       method,
       headers,
       body,
-      mode: 'cors',
       credentials: 'include',
       cache: 'no-store'
     }
@@ -58,7 +57,6 @@ function createHeaders(accept, contentType, auth) {
   return {
     ...accept ? {'Accept': accept} : {'Accept': 'application/json'},
     ...contentType ? {'Content-Type': contentType} : {'Content-Type': 'application/json'},
-    'Access-Control-Allow-Origin': 'http:/localhost:8082',
     'Access-Control-Allow-Credentials': true,
     'Access-Control-Allow-Headers': ['Origin', 'Content-Type', 'Accept', 'Authorization', 'Set-Cookie']
   };
