@@ -69,7 +69,6 @@ export function createAuthRouter(passport, alephChangePasswordApiUrl, jwtOptions
   function create(req, res) {
     appLogger.info('auth/ - create');
     const data = req.body;
-    console.log(data);
     const sanitazedUser = sanitaze(data.username);
     const authToken = generateAuthorizationHeader(sanitazedUser, data.password);
     res.json({token: authToken});

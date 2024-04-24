@@ -98,13 +98,13 @@ function setTab(tab, username = undefined) {
   const vaihto = document.getElementById('vaihto');
   const salasana = document.getElementById('salasana');
   const accountMenu = document.getElementById('accountMenu');
-  const username = document.getElementById('username');
+  const usernameDiv = document.getElementById('username');
 
   if (tab === 'vaihto') {
     vaihto.style.display = 'inline-flex';
     salasana.style.display = 'none';
     accountMenu.style.display = 'block';
-    username.innerHTML.username;
+    usernameDiv.innerHTML = username;
     return;
   }
 
