@@ -21,7 +21,7 @@ import {appLogger, pathCheck, handleAppError, handlePageNotFound} from './middle
 
 export async function startApp(configOptions) {
 
-  const {httpPort, sharedLocationOptions, xServiceURL, userLibrary, ownAuthzURL, ownAuthzApiKey, alephChangePasswordApiUrl, jwtOptions} = configOptions;
+  const {httpPort, enableProxy, sharedLocationOptions, xServiceURL, userLibrary, ownAuthzURL, ownAuthzApiKey, alephChangePasswordApiUrl, jwtOptions} = configOptions;
 
   const server = await initExpress();
 
@@ -41,6 +41,7 @@ export async function startApp(configOptions) {
     // Set the application as an Express app (function)
 
     const app = express();
+    app.enable('trust proxy', Boolean(enableProxy));
     app.use(cookieParser());
 
     //---------------------------------------------------//
