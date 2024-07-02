@@ -1,6 +1,7 @@
 import {readEnvironmentVariable} from '@natlibfi/melinda-backend-commons';
 
 export const httpPort = readEnvironmentVariable('HTTP_PORT', {defaultValue: 8080, format: v => Number(v)});
+export const enableProxy = readEnvironmentVariable('ENABLE_PROXY', {defaultValue: false, format: v => parseBoolean(v)});
 
 export const xServiceURL = readEnvironmentVariable('ALEPH_X_SVC_URL');
 export const userLibrary = readEnvironmentVariable('ALEPH_USER_LIBRARY');
