@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import passport from 'passport';
+import {authCheck} from '../../middlewares.js';
 
 //****************************************************************************//
 //                                                                            //
@@ -8,43 +8,22 @@ import passport from 'passport';
 //****************************************************************************//
 
 
-export function createMainViewRouter() {
-  return new Router(passport)
-    .get('/', renderSalasana)
-    .get('/home', renderHome)
-    .get('/user', passport.authenticate('melinda', {session: false}), renderUser);
+export function createMainViewRouter(passport) {
+  return new Router()
+    .get('/', authCheck({successRedirects: '/home', allowUnauthorized: true}, passport), renderLogin)
+    .get('/home', authCheck({failureRedirects: '/'}, passport), renderSalasana);
 
+  function renderLogin(req, res) {
+    const renderedView = 'login';
+    const localVariable = {title: 'Kirjaudu | Salasana', isLogin: true, location: {name: 'Kirjaudu', link: '/'}, onload: 'initialize()'};
+
+    return res.render(renderedView, localVariable);
+  }
 
   function renderSalasana(req, res) {
-    // const {user} = req.oidc;
-    const user = {id: 'test'};
     const renderedView = 'salasana';
-    const localVariable = {title: 'Salasana', username: user.id, location: {name: 'Salasana', link: '/'}, onload: 'initialize()'};
-
-    return res.render(renderedView, localVariable);
-  }
-
-
-  function renderHome(req, res) {
-    // const {user} = req.oidc;
-    const user = {id: 'test'};
-
-    const renderedView = 'homepage';
-    const localVariable = {title: 'Etusivu | Salasana', username: user.id, location: {name: 'Etusivu', link: '/home'}};
-
-    return res.render(renderedView, localVariable);
-  }
-
-
-  function renderUser(req, res) {
-    // const {user} = req.oidc;
-    const user = {id: 'test'};
-
-    console.log(JSON.stringify(user));
-    console.log(JSON.stringify(req.headers));
-
-    const renderedView = 'user';
-    const localVariable = {title: 'Käyttäjäprofiili | Salasana', user, username: user.id, location: {name: 'Käyttäjäprofiili', link: 'user'}};
+    const username = req.user.displayName || req.user.id || 'melinda-user';
+    const localVariable = {title: 'Vaihda salasana | Salasana', isLogin: false, username, location: {name: 'Vaihda salasana', link: '/home'}, onload: 'initialize()'};
 
     return res.render(renderedView, localVariable);
   }

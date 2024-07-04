@@ -1,26 +1,26 @@
-export function authRequest(data) {
-  const url = 'auth/';
+export function authGetBaseToken(data) {
+  const url = 'rest/auth/getBaseToken';
   const body = JSON.stringify(data);
   return doRestCall({url, method: 'POST', body});
 }
 
-export function verifyBasic(token) {
-  const url = 'auth/verifyBasic';
+export function authLogin(token) {
+  const url = 'rest/auth/login';
   return doRestCall({url, method: 'GET', auth: token});
 }
 
-export function verifyJwt() {
-  const url = 'auth/verifyJwt';
+export function authVerify() {
+  const url = 'rest/auth/verify';
   return doRestCall({url, method: 'GET'});
 }
 
 export function logout() {
-  const url = 'auth/logout';
+  const url = 'rest/auth/logout';
   return doRestCall({url, method: 'GET'});
 }
 
 export function changePassword(data) {
-  const url = 'auth/change';
+  const url = 'rest/auth/change';
   const body = JSON.stringify(data);
   return doRestCall({url, method: 'POST', body});
 }

@@ -7,12 +7,14 @@ on: push
 jobs:
   build-node-versions:
     name: Node version matrix
-    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [20.x, 21.x]
+        node-version: [20.x, 22.x]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout the code
@@ -21,7 +23,6 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
       env:
         NPM_CONFIG_IGNORE_SCRIPTS: true
     - run: npm audit --package-lock-only --production --audit-level=moderate
@@ -49,7 +50,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: mikaelvesavuori/license-compliance-action@v1.0.3
+    - uses: mikaelvesavuori/license-compliance-action@v1
       with:
         exclude_pattern: /^@natlibfi/
 

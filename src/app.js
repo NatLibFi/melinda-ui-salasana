@@ -127,18 +127,20 @@ export async function startApp(configOptions) {
     app.use('/styles', express.static(path.join(import.meta.dirname, 'styles')));
 
     app.use(pathCheck);
+
     //---------------------------------------------------//
     // Setup Express Routers for these defined routes
     //   - require authentication to all but status route
 
     app.use('/', createMainViewRouter(passport));
-    app.use('/auth', createAuthRouter(passport, alephChangePasswordApiUrl, jwtOptions));
     app.use('/status', createStatusRouter());
-    app.use('/logout', (req, res) => {
-      appLogger.info('auth/ - logout');
-      res.cookie('melinda', 'loggedout', {httpOnly: true, SameSite: 'None', secure: process.env.NODE_ENV === "production", maxAge: -1});
-      res.redirect('/');
+
+    app.use('/rest/auth', createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl));
+
+    app.use('/logout', passport.authenticate('jwt', {session: false}), (req, res) => {
+      res.redirect('/rest/auth/logout');
     });
+
     //---------------------------------------------------//
     // Setup handling for all other routes
     // When page is not found:

@@ -17,100 +17,13 @@
   <div id="root">
 
     <!-- ---------------------------------------------------------------------- -->
-
-    <!-- salasana tab -->
-    <div id="salasana" class="tab-wrap">
-      <form id="login" class="form-modal">
-        <div class="form-headline">
-          <h3>Kirjaudu sisään</h3>
-        </div>
-
-        <div class="form-content">
-
-          <div id="loginFormUsername" class="HBox form-field-container full-width">
-            <div class="label-wrapper">
-              <label for="login-username">
-                Käyttäjätunnus <span class="form-field-required"></span>
-              </label>
-            </div>
-            <div class="input-wrapper">
-              <span class="material-icons">person_outline</span>
-              <input id="login-username" type="text" name="username" required="true" autofocus="true" spellcheck="false"
-                autocomplete="username" placeholder="Syötä Melinda-tunnus" title="Käyttäjätunnus on vaadittu kenttä">
-            </div>
-          </div>
-
-          <div id="loginFormPassword" class="HBox form-field-container full-width">
-            <div class="label-wrapper">
-              <label for="login-password">Salasana<span class="form-field-required"></label>
-            </div>
-            <div class="input-wrapper">
-              <span class="material-icons">lock_outline</span>
-              <input id="login-password" type="password" name="password" required="true" spellcheck="false"
-                autocomplete="current-password" placeholder="Syötä salasana" title="Salasana on vaadittu kenttä">
-            </div>
-          </div>
-
-          <div id="loginFormAcceptTerms" class="VBox">
-
-            <div class="HBox form-field-container checkbox full-width">
-              <div class="label-wrapper">
-                <label for="acceptterms">
-
-                  <div class="input-wrapper">
-                    <input id="acceptterms" type="checkbox">
-                    <span class="material-icons"></span>
-                  </div>
-
-                  <div class="outer-link">
-                    Hyväksyn
-                    <a href="https://www.kiwi.fi/pages/viewpage.action?pageId=148177248" target="_blank"
-                      rel="noopener noreferrer" title="Avautuu uuteen välilehteen">
-                      tietosuojaselosteen <span class="material-icons open-in-new">open_in_new</span></a>
-                    ja evästeiden käytön. Evästeitä käytetään käyttäjän autentikoimiseen istunnon aikana.
-                  </div>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-action">
-          <button type="submit">
-            Kirjaudu
-          </button>
-        </div>
-
-      </form>
-    </div>
-    <!-- salasana tab end -->
-
     <!-- vaihto tab -->
-    <div id="vaihto" class="tab-wrap" style="display: none;">
+    <div id="vaihto" class="tab-wrap">
       <form id="change" class="form-container">
-
-        <div class="form-header">
-          <h3>Vaihda salasana</h3>
-        </div>
-
         <div class="form-content">
           <div class="form-content-section direction-row">
-            <div class="form-field-container bordered">
-              <div class="label-wrapper">
-                <label>Ohje</label>
-              </div>
-              <div class="list-wrapper">
-                <ul>
-                  <li>Salasanan on oltava vähintään 8 merkkiä pitkä</li>
-                  <li>Salasana voi olla enintään 10 merkkiä pitkä</li>
-                  <li>Salasanassa sallitut erikoismerkit: <span class="special-charracters">$ ? * ! . , - _</span></li>
-                  <li>Salasana ei voi sisältää rivinvaihtoja</li>
-                  <li>Salasana ei voi sisältää sisennyksiä</li>
-                  <li>Salasana ei voi sisältää välilyöntejä</li>
-                </ul>
-              </div>
-            </div>
-            <div>
+            <div class="filler"></div>
+            <div class="column-wrap">
               <div id="changeFormPassword" class="form-field-container">
                 <div class="label-wrapper">
                   <label for="change-password">
@@ -152,16 +65,26 @@
                     title="Anna ohjeen mukainen salasana">
                 </div>
               </div>
+              <div class="form-footer">
+                <button type="submit">
+                  Vaihda salana
+                </button>
+              </div>
             </div>
-
+            <figure>
+              <figcaption>Ohje</figcaption>
+              <ul>
+                <li>Salasanan on oltava vähintään 8 merkkiä pitkä</li>
+                <li>Salasana voi olla enintään 10 merkkiä pitkä</li>
+                <li>Salasanassa sallitut erikoismerkit: <span class="special-charracters">$ ? * ! . , - _</span></li>
+                <li>Salasana ei voi sisältää rivinvaihtoja</li>
+                <li>Salasana ei voi sisältää sisennyksiä</li>
+                <li>Salasana ei voi sisältää välilyöntejä</li>
+              </ul>
+            </figure>
+            <div class="filler"></div>
           </div>
         </div>
-        <div class="form-footer">
-          <button type="submit">
-            Vaihda
-          </button>
-        </div>
-
       </form>
     </div>
     <!-- vaihto tab end -->
