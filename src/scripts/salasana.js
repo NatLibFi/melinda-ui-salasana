@@ -19,9 +19,11 @@ async function changeEvent(event) {
 
   const form = document.getElementById('change');
   const formData = new FormData(form);
+  const submitButton = document.getElementById('form-change-password-submit-button');
 
   startProcess();
   try {
+    submitButton.setAttribute('disabled', true);
     const {message} = await changePassword({curPass: formData.get('currentPassword'), newPass: formData.get('newPassword'), newPassVerify: formData.get('newPasswordVerify')});
 
     if (message) {
@@ -38,6 +40,7 @@ async function changeEvent(event) {
   } catch (err) {
     console.log(err);
   } finally {
+    submitButton.removeAttribute('disabled', true);
     stopProcess();
   };
 }
