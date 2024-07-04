@@ -3,7 +3,7 @@ import {startProcess, stopProcess} from '/shared/scripts/progressbar.js';
 import {eventHandled} from '/shared/scripts/uiUtils.js';
 import {showSnackbar} from '/shared/scripts/snackbar.js';
 
-window.initialize = function () {
+window.initializeLogin = function () {
   console.log('Initializing Login');
 
   //disable back button

@@ -15,7 +15,7 @@ export function createMainViewRouter(passport) {
 
   function renderLogin(req, res) {
     const renderedView = 'login';
-    const localVariable = {title: 'Kirjaudu | Salasana', isLogin: true, location: {name: 'Kirjaudu', link: '/'}, onload: 'initialize()'};
+    const localVariable = {title: 'Kirjaudu | Salasana', location: {name: 'Kirjaudu', link: '/'}, onload: 'initializeLogin()'};
 
     return res.render(renderedView, localVariable);
   }
@@ -23,7 +23,7 @@ export function createMainViewRouter(passport) {
   function renderSalasana(req, res) {
     const renderedView = 'salasana';
     const username = req.user.displayName || req.user.id || 'melinda-user';
-    const localVariable = {title: 'Vaihda salasana | Salasana', isLogin: false, username, location: {name: 'Vaihda salasana', link: '/home'}, onload: 'initialize()'};
+    const localVariable = {title: 'Vaihda salasana | Salasana', username, location: {name: 'Vaihda salasana', link: '/home'}, onload: 'initializeVaihto()'};
 
     return res.render(renderedView, localVariable);
   }

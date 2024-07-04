@@ -1,9 +1,9 @@
 import {startProcess, stopProcess} from '/shared/scripts/progressbar.js';
 import {eventHandled} from '/shared/scripts/uiUtils.js';
 import {showSnackbar} from '/shared/scripts/snackbar.js';
-import {changePassword} from "/scripts/rest.js";
+import {changePassword} from "/scripts/callRest.js";
 
-window.initialize = function () {
+window.initializeVaihto = function () {
   console.log('Initializing Salasana');
   addFormHandlingEventListeners();
 };
