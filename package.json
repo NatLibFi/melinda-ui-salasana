@@ -44,7 +44,6 @@
     "debug": "^4.3.4",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
-    "express-openid-connect": "^2.17.1",
     "passport": "^0.7.0"
   },
   "devDependencies": {
