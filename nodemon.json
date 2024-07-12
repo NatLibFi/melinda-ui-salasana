@@ -1,0 +1,14 @@
+{
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "events": {
+    "restart": "npm run lint:fix"
+  },
+  "exec": "npm run build && npm run start",
+  "ext": "css, hbs, js, json",
+  "restartable": "rs",
+  "watch": [
+    "src/"
+  ]
+}

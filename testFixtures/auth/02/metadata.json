@@ -1,0 +1,6 @@
+{
+  "description": "Error on mix pair values",
+  "only": false,
+  "skip": false,
+  "method": "validatePassword"
+}

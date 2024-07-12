@@ -1,0 +1,99 @@
+<!-- -------------------------------------------------------------------------- -->
+<!-- Salasana body -->
+<!-- -------------------------------------------------------------------------- -->
+
+<div id="bodywrapper" class="viewport-full flex-column">
+
+  <!-- ------------------------------------------------------------------------ -->
+  <!-- Navigation bar -->
+  {{> sharedPartials/navbar }}
+
+  <!-- ------------------------------------------------------------------------ -->
+  <!-- Progress bar -->
+  <div id="progressbar" class="progress-bar-inactive"></div>
+
+  <!-- ------------------------------------------------------------------------ -->
+  <!-- Application -->
+  <div id="root">
+
+    <!-- ---------------------------------------------------------------------- -->
+    <!-- vaihto tab -->
+    <div id="vaihto" class="tab-wrap">
+      <form id="change" class="form-container">
+        <div class="form-content">
+          <div class="form-content-section direction-row">
+            <div class="filler"></div>
+            <div class="column-wrap">
+              <div id="changeFormPassword" class="form-field-container full-width">
+                <div class="label-wrapper">
+                  <label for="changePasswordOrg">
+                    Nykyinen salasana<span class="form-field-required"></span>
+                  </label>
+                </div>
+                <div class="input-wrapper">
+                  <span class="material-icons">key</span>
+                  <input id="changePasswordOrg" type="password" name="currentPassword" required="true" autofocus="true"
+                    spellcheck="false" autocomplete="current-password" placeholder="Syötä nykyinen salasana"
+                    pattern="^.{1,10}$" title="Syötä nykyinen salasana">
+                </div>
+              </div>
+
+              <div id="changeFormPassword" class="form-field-container full-width">
+                <div class="label-wrapper">
+                  <label for="changePasswordNew">
+                    Uusi salasana<span class="form-field-required"></span>
+                  </label>
+                </div>
+                <div class="input-wrapper">
+                  <span class="material-icons">key</span>
+                  <input id="changePasswordNew" type="password" name="newPassword" required="true" spellcheck="false"
+                    autocomplete="new-password" placeholder="Syötä uusi salasana"
+                    pattern="^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$"
+                    title="Anna ohjeen mukainen salasana">
+                </div>
+              </div>
+
+              <div id="changeFormPassword" class="form-field-container full-width">
+                <div class="label-wrapper">
+                  <label for="changePasswordVerify">Uusi salasana uudelleen<span class="form-field-required"></label>
+                </div>
+                <div class="input-wrapper">
+                  <span class="material-icons">key</span>
+                  <input id="changePasswordVerify" type="password" name="newPasswordVerify" required="true"
+                    spellcheck="false" autocomplete="new-password" placeholder="Syötä uusi salasana uudelleen"
+                    pattern="^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$"
+                    title="Anna ohjeen mukainen salasana">
+                </div>
+              </div>
+              <div class="form-footer">
+                <button id="formChangePasswordSubmitButton" type="submit">
+                  Vaihda salasana
+                </button>
+              </div>
+            </div>
+            <figure>
+              <figcaption>Ohje</figcaption>
+              <ul>
+                <li>Salasanan on oltava vähintään 8 merkkiä pitkä</li>
+                <li>Salasana voi olla enintään 10 merkkiä pitkä</li>
+                <li>Salasanassa sallitut erikoismerkit: <span class="special-charracters">$ ? * ! . , - _</span></li>
+                <li>Salasana ei voi sisältää rivinvaihtoja</li>
+                <li>Salasana ei voi sisältää sisennyksiä</li>
+                <li>Salasana ei voi sisältää välilyöntejä</li>
+              </ul>
+            </figure>
+            <div class="filler"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- vaihto tab end -->
+
+    <!-- For displaying info messages and errors to user -->
+    {{> sharedPartials/snackbars }}
+
+  </div>
+
+  <!-- ------------------------------------------------------------------------ -->
+  <!-- Footer -->
+  {{> sharedPartials/footer }}

@@ -1,0 +1,6 @@
+{
+  "description": "Error on values that contain returns",
+  "only": false,
+  "skip": false,
+  "method": "validatePassword"
+}
