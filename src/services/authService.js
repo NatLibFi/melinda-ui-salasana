@@ -36,7 +36,7 @@ export function validatePassword(password, passwordVerify) {
   if (!/^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$/gu.test(password)) {
     return {
       valid: false,
-      error: `Salasanassa ei ole ohjeen mukainen`
+      error: `Salasana ei ole ohjeen mukainen`
     };
   }
 
