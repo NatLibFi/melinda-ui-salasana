@@ -9,7 +9,7 @@ import {AlephStrategy} from '@natlibfi/passport-melinda-aleph';
 import {MelindaJwtStrategy, verify, cookieExtractor} from '@natlibfi/passport-melinda-jwt';
 
 import {createAuthRouter, createStatusRouter, createMainViewRouter} from './routers/routers.js';
-import {appLogger, handleAppError, handlePageNotFound} from './middlewares.js';
+import {appLogger, handleAppError, handlePageNotFound, authCheck} from './middlewares.js';
 
 /*****************************************************************************/
 /* START THE APP                                                             */
@@ -135,7 +135,7 @@ export async function startApp(configOptions) {
 
     app.use('/rest/auth', createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl));
 
-    app.use('/logout', passport.authenticate('jwt', {session: false}), (req, res) => {
+    app.use('/logout', authCheck({failureRedirects: '/'}, passport), (req, res) => {
       res.redirect('/rest/auth/logout');
     });
 
