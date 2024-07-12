@@ -10,11 +10,6 @@ import {createLogger} from '@natlibfi/melinda-backend-commons';
 
 export const appLogger = createLogger();
 
-export function pathCheck(req, res, next) {
-  appLogger.info(`${req.method} - ${req.path}`);
-  next();
-}
-
 //---------------------------------------------------//
 // Middleware function to handle 404 pages
 

@@ -23,7 +23,7 @@ export function createMainViewRouter(passport) {
   function renderSalasana(req, res) {
     const renderedView = 'salasana';
     const username = req.user.displayName || req.user.id || 'melinda-user';
-    const localVariable = {title: 'Vaihda salasana | Salasana', username, location: {name: 'Vaihda salasana', link: '/home'}, onload: 'initializeVaihto()'};
+    const localVariable = {title: 'Vaihda salasana | Salasana', username, location: {name: 'Vaihda salasana', link: '/home'}, onload: 'initializeSalasana()'};
 
     return res.render(renderedView, localVariable);
   }

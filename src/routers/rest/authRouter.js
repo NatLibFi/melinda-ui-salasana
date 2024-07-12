@@ -1,9 +1,9 @@
 import httpStatus from 'http-status';
-import {Router} from 'express';
+import e, {Router} from 'express';
 import {generateAuthorizationHeader} from '@natlibfi/melinda-commons';
 import {generateJwtToken} from '@natlibfi/passport-melinda-jwt';
 import {appLogger} from '../../middlewares.js';
-import {sanitaze, validatePassword} from '../../services/authService.js';
+import {sanitize, validatePassword} from '../../services/authService.js';
 
 export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl) { // eslint-disable-line no-unused-vars
   const cookieNames = {userToken: 'melinda'};
@@ -32,16 +32,16 @@ export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl
       res.status(500).json({error: 'username or password malformed or missing'});
       return;
     }
-    const sanitazedUser = sanitaze(username);
-    const authToken = generateAuthorizationHeader(sanitazedUser, password);
+    const sanitizedUser = sanitize(username);
+    const authToken = generateAuthorizationHeader(sanitizedUser, password);
     res.json({token: authToken});
   }
 
   async function change(req, res) {
     appLogger.info('auth/change - change');
     const {id} = req.user;
-    const {curPass, newPass, newPassVerify} = req.body;
-    const validationResult = validatePassword(newPass, newPassVerify);
+    const {currentPassword, newPassword, newPasswordVerify} = req.body;
+    const validationResult = validatePassword(newPassword, newPasswordVerify);
 
     if (validationResult.valid === false) {
       return res.status(httpStatus.BAD_REQUEST).send({
@@ -49,19 +49,37 @@ export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl
       });
     }
 
-    const result = await changePassword(id, curPass, newPass);
-    appLogger.debug(result);
-    appLogger.debug(JSON.stringify(result));
-    // const result = {status: 'ok'};
-    res.status(httpStatus.OK).json(result);
+    const result = await changePassword(id, currentPassword, newPassword);
 
-    async function changePassword(id, curPass, newPass) {
+    if (result === 401) {
+      appLogger.info('auth / change - change - invalid currentPassword');
+      return res.status(httpStatus.FORBIDDEN).send({
+        message: 'Nykyinen salasana on virheellinen'
+      });
+    }
+
+    if (result === 403) {
+      appLogger.info('auth / change - change - aleph connection error');
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+        message: 'Palvelun asetuksissa on ongelmia. Otathan yhteyttä melinda postiin, kiitos!'
+      });
+    }
+
+    if (result === 200) {
+      appLogger.info('auth / change - change - password change ok');
+      return res.status(httpStatus.OK).send({message: false});
+    }
+
+    appLogger.info('auth / change - change - Unexpected error');
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message: 'Palvelun asetuksissa on ongelmia. Otathan yhteyttä melinda postiin, kiitos!'});
+
+    async function changePassword(id, currentPassword, newPassword) {
       const fetchOptions = {
         method: 'POST',
         body: JSON.stringify({
           username: id,
-          password: curPass,
-          new_password: newPass
+          password: currentPassword,
+          new_password: newPassword
         }),
         headers: new Headers({
           'Content-Type': 'application/json'
@@ -70,8 +88,7 @@ export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl
       };
 
       const result = await fetch(alephChangePasswordApiUrl, fetchOptions);
-      appLogger.info(result.status);
-      return {};
+      return result.status;
     }
   }
 

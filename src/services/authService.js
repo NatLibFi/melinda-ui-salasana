@@ -1,4 +1,4 @@
-export function sanitaze(value) {
+export function sanitize(value) {
   return value
     .replace(/\r/gu, '')
     .replace(/%0d/gu, '')

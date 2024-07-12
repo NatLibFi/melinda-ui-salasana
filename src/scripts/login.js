@@ -35,7 +35,7 @@ async function loginEvent(event) {
   startProcess();
   try {
     const {token} = await authGetBaseToken({username: formData.get('username'), password: formData.get('password')});
-    const resp = await authLogin(token);
+    await authLogin(token);
     location.reload();
   } catch (err) {
     console.log(err);
