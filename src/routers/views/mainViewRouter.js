@@ -29,6 +29,4 @@ export function createMainViewRouter(passport) {
 
     return res.render(renderedView, localVariable);
   }
-
-
 }

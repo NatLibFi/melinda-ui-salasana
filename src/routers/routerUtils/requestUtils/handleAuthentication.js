@@ -1,3 +1,16 @@
+/**
+* Create auth handler
+*
+* @param {Passport} [passport]
+* @returns {Function;} - function to handle auth checkking and reroroute
+*
+* @example
+* import passport from 'passport';
+* passport.use(new Strategy({strategyOptions}, verify));
+* app.use(passport.initialize());
+* // create authHandler
+* const authHandler = createAuthHandler(passport);
+*/
 export function createAuthHandler(passport) {
   return authHandler;
 

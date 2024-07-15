@@ -38,6 +38,7 @@ async function changeEvent(event) {
 
     return;
   } catch (err) {
+    showSnackbar({style: 'error', text: 'Sivu ei latautunut oikein, ole hyvä ja lataa sivu uudelleen.'});
     console.log(err);
   } finally {
     submitButton.removeAttribute('disabled');
