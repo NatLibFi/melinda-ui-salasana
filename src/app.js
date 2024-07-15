@@ -135,7 +135,7 @@ export async function startApp(configOptions) {
 
     app.use('/rest/auth', createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl));
 
-    app.use('/logout', passport.authenticate('jwt', {session: false}), (req, res) => {
+    app.use('/logout', (req, res) => {
       res.redirect('/rest/auth/logout');
     });
 
