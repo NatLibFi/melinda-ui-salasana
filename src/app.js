@@ -29,7 +29,6 @@ export async function startApp(configOptions) {
 
   //////////////////////////////////////////////////////////////////
 
-
   //----------------------------------------------------//
   // Defining the Express server
 
@@ -96,12 +95,10 @@ export async function startApp(configOptions) {
       path.join(import.meta.dirname, sharedViewsLocation)
     ]);
 
-
     //---------------------------------------------------//
     // Setup Express logger
 
     app.use(createExpressLogger());
-
 
     //---------------------------------------------------//
     // Setup Express built-in middleware function 'express.urlencoded'
@@ -110,13 +107,11 @@ export async function startApp(configOptions) {
 
     app.use(express.urlencoded({extended: false}));
 
-
     //---------------------------------------------------//
     // Setup Express built-in middleware function 'express.json'
     //    parses requests with JSON payload
 
     app.use(express.json());
-
 
     //---------------------------------------------------//
     // Setup Express built-in middleware function 'express.static'
