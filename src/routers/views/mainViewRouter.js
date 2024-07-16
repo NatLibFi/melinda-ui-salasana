@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {authCheck} from '../../middlewares.js';
+import {createAuthHandler} from '../routerUtils/requestUtils/handleAuthentication.js';
 
 //****************************************************************************//
 //                                                                            //
@@ -9,9 +9,11 @@ import {authCheck} from '../../middlewares.js';
 
 
 export function createMainViewRouter(passport) {
+  const authHandler = createAuthHandler(passport);
+
   return new Router()
-    .get('/', authCheck({successRedirects: '/home', allowUnauthorized: true}, passport), renderLogin)
-    .get('/home', authCheck({failureRedirects: '/'}, passport), renderSalasana);
+    .get('/', authHandler({successRedirects: '/home', allowUnauthorized: true}), renderLogin)
+    .get('/home', authHandler({failureRedirects: '/'}), renderSalasana);
 
   function renderLogin(req, res) {
     const renderedView = 'login';
@@ -27,6 +29,4 @@ export function createMainViewRouter(passport) {
 
     return res.render(renderedView, localVariable);
   }
-
-
 }
