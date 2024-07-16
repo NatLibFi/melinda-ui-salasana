@@ -40,8 +40,8 @@ export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl
   async function change(req, res) {
     appLogger.info('auth/change - change');
     const {id} = req.user;
-    const {currentPassword, newPassword, newPasswordVerify} = req.body;
-    const validationResult = validatePassword(newPassword, newPasswordVerify);
+    const {currentPassword, newPassword, newPasswordVerified} = req.body;
+    const validationResult = validatePassword(newPassword, newPasswordVerified);
 
     if (validationResult.valid === false) {
       return res.status(httpStatus.BAD_REQUEST).send({

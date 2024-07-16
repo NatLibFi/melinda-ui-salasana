@@ -9,7 +9,7 @@ window.initializeSalasana = function () {
 };
 
 function addFormHandlingEventListeners() {
-  const changeForm = document.getElementById('change');
+  const changeForm = document.getElementById('changePasswordForm');
   changeForm.addEventListener('submit', changeEvent);
 }
 
@@ -17,23 +17,23 @@ async function changeEvent(event) {
   console.log('Change submit event');
   eventHandled(event);
 
-  const form = document.getElementById('change');
+  const form = document.getElementById('changePasswordForm');
   const formData = new FormData(form);
-  const submitButton = document.getElementById('formChangePasswordSubmitButton');
+  const submitButton = document.getElementById('submitChangePassword');
 
   startProcess();
   try {
     submitButton.setAttribute('disabled', true);
-    const {message = false} = await changePassword({currentPassword: formData.get('currentPassword'), newPassword: formData.get('newPassword'), newPasswordVerify: formData.get('newPasswordVerify')});
+    const {message = false} = await changePassword({currentPassword: formData.get('currentPassword'), newPassword: formData.get('newPassword'), newPasswordVerified: formData.get('newPasswordVerified')});
     console.log('password event responce got');
     if (message) {
       showSnackbar({style: 'error', text: message});
       return;
     }
 
-    document.getElementById('changePasswordOrg').value = '';
-    document.getElementById('changePasswordNew').value = '';
-    document.getElementById('changePasswordVerify').value = '';
+    document.getElementById('currentPassword').value = '';
+    document.getElementById('newPassword').value = '';
+    document.getElementById('newPasswordVerified').value = '';
     showSnackbar({style: 'success', text: 'Salasana on vaihdettu'});
 
     return;
