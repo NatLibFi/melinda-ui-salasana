@@ -1,47 +1,54 @@
+import {changePassword} from '/scripts/callRest.js';
+import {disableElement, enableElement} from '/shared/scripts/elements.js';
 import {startProcess, stopProcess} from '/shared/scripts/progressbar.js';
-import {eventHandled} from '/shared/scripts/uiUtils.js';
 import {showSnackbar} from '/shared/scripts/snackbar.js';
-import {changePassword} from "/scripts/callRest.js";
+import {eventHandled} from '/shared/scripts/uiUtils.js';
 
 window.initializeSalasana = function () {
-  console.log('Initializing Salasana');
+  console.log('Initializing Salasana application');
   addFormHandlingEventListeners();
 };
 
 function addFormHandlingEventListeners() {
-  const changeForm = document.getElementById('changePasswordForm');
-  changeForm.addEventListener('submit', changeEvent);
+  const changePasswordForm = document.getElementById('changePasswordForm');
+  changePasswordForm.addEventListener('submit', handleFormSubmit);
 }
 
-async function changeEvent(event) {
-  console.log('Change submit event');
+async function handleFormSubmit(event) {
+  console.log(`Submit event for ${event.target.id}`);
+
   eventHandled(event);
-
-  const form = document.getElementById('changePasswordForm');
-  const formData = new FormData(form);
-  const submitButton = document.getElementById('submitChangePassword');
-
   startProcess();
+
+  const form = event.target;
+  const submitButton = event.submitter;
+
+  const formData = new FormData(form);
+
+  const passwordData = {
+    currentPassword: formData.get('currentPassword'),
+    newPassword: formData.get('newPassword'),
+    newPasswordVerified: formData.get('newPasswordVerified')
+  }
+
+  disableElement(submitButton);
+
   try {
-    submitButton.setAttribute('disabled', true);
-    const {message = false} = await changePassword({currentPassword: formData.get('currentPassword'), newPassword: formData.get('newPassword'), newPasswordVerified: formData.get('newPasswordVerified')});
-    console.log('password event responce got');
+    const {message = false} = await changePassword(passwordData);
+
     if (message) {
       showSnackbar({style: 'alert', text: message});
       return;
     }
 
-    document.getElementById('currentPassword').value = '';
-    document.getElementById('newPassword').value = '';
-    document.getElementById('newPasswordVerified').value = '';
     showSnackbar({style: 'success', text: 'Salasana on vaihdettu'});
-
-    return;
-  } catch (err) {
-    showSnackbar({style: 'error', text: 'Sivu ei latautunut oikein, ole hyvä ja lataa sivu uudelleen.'});
-    console.log(err);
+    form.reset();
+  } catch (error) {
+    console.log('Error in function submitForm :', error);
+    showSnackbar({style: 'error', text: 'Sivu ei latautunut oikein, yritä ladata sivu uudelleen.'});
   } finally {
-    submitButton.removeAttribute('disabled');
+    enableElement(submitButton);
     stopProcess();
   };
+
 }
