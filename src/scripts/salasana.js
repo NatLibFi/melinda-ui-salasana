@@ -27,7 +27,7 @@ async function changeEvent(event) {
     const {message = false} = await changePassword({currentPassword: formData.get('currentPassword'), newPassword: formData.get('newPassword'), newPasswordVerified: formData.get('newPasswordVerified')});
     console.log('password event responce got');
     if (message) {
-      showSnackbar({style: 'error', text: message});
+      showSnackbar({style: 'alert', text: message});
       return;
     }
 

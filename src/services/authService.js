@@ -15,28 +15,42 @@ export function validatePassword(password, passwordVerify) {
   if (password !== passwordVerify) {
     return {
       valid: false,
-      error: 'Salasanat eivät täsmää'
+      error: 'Uusi salasana ja salasanan vahvistus eivät täsmää'
     };
   }
 
   if (password.length > maxLength) {
     return {
       valid: false,
-      error: `Salasanan pituus ei saa ylittää ${maxLength} merkkiä`
+      error: 'Uusi salasana on liian pitkä'
     };
   }
 
   if (password.length < minLength) {
     return {
       valid: false,
-      error: `Salasanan pituus pitää ylittää ${minLength} merkkiä`
+      error: 'Uusi salasana on liian lyhyt'
+    };
+  }
+
+  if (/[\s\t\n\r]/.test(password)) {
+    return {
+      valid: false,
+      error: 'Uusi salasana sisältää tyhjämerkkejä, jotka eivät ole sallittuja'
+    };
+  }
+
+  if (!/[_$!?,.*-]/.test(password)) {
+    return {
+      valid: false,
+      error: 'Uusi salasana sisältää erikoismerkkejä, jotka eivät ole sallittuja'
     };
   }
 
   if (!/^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$/gu.test(password)) {
     return {
       valid: false,
-      error: `Salasana ei ole ohjeen mukainen`
+      error: 'Uusi salasana ei ole vaatimusten mukainen'
     };
   }
 

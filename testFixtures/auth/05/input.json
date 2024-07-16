@@ -1,4 +1,4 @@
 {
-  "newPass": "123456  78",
-  "newPassVerify": "123456  78"
+  "newPass": "123456\t78",
+  "newPassVerify": "123456\t78"
 }
