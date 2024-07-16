@@ -1,0 +1,46 @@
+/* Keep until color theme is designed */
+button {
+  background-color: var(--color-primary-blue);
+  border-color: var(--color-primary-blue);
+}
+
+.salasana-ui {
+
+  @media screen and (max-width: 1100px) {
+    .panels {
+      flex-direction: column;
+    }
+  }
+
+  /* Keep until shared panel stylesheet is fixed */
+  .panel-container {
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    width: 100%;
+  }
+
+  /* Keep until shared list stylesheet is created */
+  ul {
+    margin-inline-start: 32px;
+    padding-inline-start: 16px;
+
+    li {
+      color: var(--color-primary-blue);
+      font-family: var(--font-family-content);
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      padding-bottom: 16px;
+
+      ul {
+        padding-top: 16px;
+      }
+
+      &::marker {
+        color: var(--color-primary-blue);
+      }
+    }
+  }
+
+}
