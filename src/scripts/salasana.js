@@ -28,7 +28,7 @@ async function handleFormSubmit(event) {
   const passwordData = {
     currentPassword: formData.get('currentPassword'),
     newPassword: formData.get('newPassword'),
-    newPasswordVerified: formData.get('newPasswordVerified')
+    newPasswordConfirmation: formData.get('newPasswordConfirmation')
   }
 
   disableElement(submitButton);

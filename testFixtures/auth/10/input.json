@@ -1,4 +1,4 @@
 {
-  "newPass": "0123456789a",
-  "newPassVerify": "0123456789a"
+  "newPassword": "0123456789a",
+  "newPasswordConfirmation": "0123456789a"
 }

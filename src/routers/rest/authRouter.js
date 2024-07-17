@@ -3,7 +3,7 @@ import e, {Router} from 'express';
 import {generateAuthorizationHeader} from '@natlibfi/melinda-commons';
 import {generateJwtToken} from '@natlibfi/passport-melinda-jwt';
 import {appLogger} from '../../middlewares.js';
-import {sanitize, validatePassword} from '../../services/authService.js';
+import {sanitize, validateNewPassword} from '../../services/authService.js';
 
 export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl) { // eslint-disable-line no-unused-vars
   const cookieNames = {userToken: 'melinda'};
@@ -40,8 +40,8 @@ export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl
   async function change(req, res) {
     appLogger.info('auth/change - change');
     const {id} = req.user;
-    const {currentPassword, newPassword, newPasswordVerified} = req.body;
-    const validationResult = validatePassword(newPassword, newPasswordVerified);
+    const {currentPassword, newPassword, newPasswordConfirmation} = req.body;
+    const validationResult = validateNewPassword(newPassword, newPasswordConfirmation);
 
     if (validationResult.valid === false) {
       return res.status(httpStatus.BAD_REQUEST).send({

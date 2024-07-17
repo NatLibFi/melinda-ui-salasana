@@ -1,4 +1,4 @@
 {
-  "newPass": "12345678'",
-  "newPassVerify": "12345678'"
+  "newPassword": "12345678'",
+  "newPasswordConfirmation": "12345678'"
 }

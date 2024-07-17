@@ -13,7 +13,7 @@ import {expect} from 'chai';
 import fixugen from '@natlibfi/fixugen';
 import {READERS} from '@natlibfi/fixura';
 
-import {validatePassword} from './authService.js';
+import {validateNewPassword} from './authService.js';
 
 const {default: generateTests} = fixugen;
 
@@ -42,8 +42,8 @@ generateTests(testsParameters);
   const output = getFixture('output.json');
 
   try {
-    if (method === 'validatePassword') {
-      const result = validatePassword(input.newPass, input.newPassVerify);
+    if (method === 'validateNewPassword') {
+      const result = validateNewPassword(input.newPassword, input.newPasswordConfirmation);
       expect(result).to.eql(output);
       return;
     }
