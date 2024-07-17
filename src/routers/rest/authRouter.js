@@ -71,7 +71,7 @@ export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl
     }
 
     appLogger.info('auth / change - change - Unexpected error');
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message: 'Häiriö Salasana-palvelussa, yritä myöhemmin uudelleen. Jos ongelma toistuu, ota yhteyttä ylläpitoon.'});
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message: 'Salasana-palvelussa on häiriö. Ota yhteyttä suoraan ylläpitoon ongelman ratkaisemiseksi.'});
 
     async function changePassword(id, currentPassword, newPassword) {
       const fetchOptions = {
