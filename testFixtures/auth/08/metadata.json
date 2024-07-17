@@ -2,5 +2,5 @@
   "description": "Error on values that contain \"",
   "only": false,
   "skip": false,
-  "method": "validatePassword"
+  "method": "validateNewPassword"
 }

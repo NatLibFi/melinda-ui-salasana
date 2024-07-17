@@ -1,4 +1,4 @@
 {
-  "error": "Salasana ei ole ohjeen mukainen",
+  "error": "Uusi salasana sisältää tyhjämerkkejä, jotka eivät ole sallittuja",
   "valid": false
 }
