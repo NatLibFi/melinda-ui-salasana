@@ -54,14 +54,14 @@ export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl
     if (result === 401) {
       appLogger.info('auth / change - change - invalid currentPassword');
       return res.status(httpStatus.FORBIDDEN).send({
-        message: 'Nykyinen salasana on virheellinen'
+        message: 'Nykyinen salasana on väärin'
       });
     }
 
     if (result === 403) {
       appLogger.info('auth / change - change - aleph connection error');
       return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
-        message: 'Palvelun asetuksissa on ongelmia. Otathan yhteyttä melinda postiin, kiitos!'
+        message: 'Häiriö palvelussa, yritä myöhemmin uudelleen. Jos ongelma toistuu, ota yhteyttä ylläpitoon.'
       });
     }
 
@@ -71,7 +71,7 @@ export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl
     }
 
     appLogger.info('auth / change - change - Unexpected error');
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message: 'Palvelun asetuksissa on ongelmia. Otathan yhteyttä melinda postiin, kiitos!'});
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message: 'Häiriö palvelussa, yritä myöhemmin uudelleen. Jos ongelma toistuu, ota yhteyttä ylläpitoon.'});
 
     async function changePassword(id, currentPassword, newPassword) {
       const fetchOptions = {

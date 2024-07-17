@@ -41,11 +41,11 @@ async function handleFormSubmit(event) {
       return;
     }
 
-    showSnackbar({style: 'success', text: 'Salasana on vaihdettu'});
+    showSnackbar({style: 'success', text: 'Melinda-tunnuksen salasana on vaihdettu onnistuneesti. Uusi salasanasi on heti voimassa.'});
     form.reset();
   } catch (error) {
-    console.log('Error in function submitForm :', error);
-    showSnackbar({style: 'error', text: 'Sivu ei latautunut oikein, yritä ladata sivu uudelleen.'});
+    console.log('Error handling form submit :', error);
+    showSnackbar({style: 'error', text: 'Virhe sivulla, yritä ladata sivu uudelleen. Jos ongelma toistuu, ota yhteyttä ylläpitoon.'});
   } finally {
     enableElement(submitButton);
     stopProcess();

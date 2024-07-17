@@ -40,7 +40,7 @@ export function validateNewPassword(newPassword, newPasswordConfirmation) {
     };
   }
 
-  if (!/[_$!?,.*-]/.test(newPassword)) {
+  if (/[^_$!?,.*-A-Za-zÀ-ȕ0-9_$!?,.*\-]/.test(newPassword)) {
     return {
       valid: false,
       error: 'Uusi salasana sisältää erikoismerkkejä, jotka eivät ole sallittuja'
