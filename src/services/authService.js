@@ -8,35 +8,49 @@ export function sanitize(value) {
     .replace(/%0A/gu, '');
 }
 
-export function validatePassword(password, passwordVerify) {
+export function validateNewPassword(newPassword, newPasswordConfirmation) {
   const maxLength = 10;
   const minLength = 8;
 
-  if (password !== passwordVerify) {
+  if (newPassword !== newPasswordConfirmation) {
     return {
       valid: false,
-      error: 'Salasanat eivät täsmää'
+      error: 'Uusi salasana ja salasanan vahvistus eivät täsmää'
     };
   }
 
-  if (password.length > maxLength) {
+  if (newPassword.length > maxLength) {
     return {
       valid: false,
-      error: `Salasanan pituus ei saa ylittää ${maxLength} merkkiä`
+      error: 'Uusi salasana on liian pitkä'
     };
   }
 
-  if (password.length < minLength) {
+  if (newPassword.length < minLength) {
     return {
       valid: false,
-      error: `Salasanan pituus pitää ylittää ${minLength} merkkiä`
+      error: 'Uusi salasana on liian lyhyt'
     };
   }
 
-  if (!/^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$/gu.test(password)) {
+  if (/[\s\t\n\r]/.test(newPassword)) {
     return {
       valid: false,
-      error: `Salasana ei ole ohjeen mukainen`
+      error: 'Uusi salasana sisältää tyhjämerkkejä, jotka eivät ole sallittuja'
+    };
+  }
+
+  if (/[^_$!?,.*-A-Za-zÀ-ȕ0-9_$!?,.*\-]/.test(newPassword)) {
+    return {
+      valid: false,
+      error: 'Uusi salasana sisältää erikoismerkkejä, jotka eivät ole sallittuja'
+    };
+  }
+
+  if (!/^[\w$?*!,\-\.\u00C4\u00E4\u00D6\u00F6\u00C5\u00E5]{8,10}$/gu.test(newPassword)) {
+    return {
+      valid: false,
+      error: 'Uusi salasana ei ole vaatimusten mukainen'
     };
   }
 

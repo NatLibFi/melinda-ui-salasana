@@ -1,4 +1,4 @@
 {
-  "error": "Salasanan pituus ei saa ylittää 10 merkkiä",
+  "error": "Uusi salasana on liian pitkä",
   "valid": false
 }

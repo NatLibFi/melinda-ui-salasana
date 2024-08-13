@@ -1,4 +1,4 @@
 {
-  "error": "Salasanat eivät täsmää",
+  "error": "Uusi salasana ja salasanan vahvistus eivät täsmää",
   "valid": false
 }

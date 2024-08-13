@@ -2,5 +2,5 @@
   "description": "Success on correct values",
   "only": false,
   "skip": false,
-  "method": "validatePassword"
+  "method": "validateNewPassword"
 }

@@ -3,7 +3,7 @@ import e, {Router} from 'express';
 import {generateAuthorizationHeader} from '@natlibfi/melinda-commons';
 import {generateJwtToken} from '@natlibfi/passport-melinda-jwt';
 import {appLogger} from '../../middlewares.js';
-import {sanitize, validatePassword} from '../../services/authService.js';
+import {sanitize, validateNewPassword} from '../../services/authService.js';
 
 export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl) { // eslint-disable-line no-unused-vars
   const cookieNames = {userToken: 'melinda'};
@@ -40,8 +40,8 @@ export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl
   async function change(req, res) {
     appLogger.info('auth/change - change');
     const {id} = req.user;
-    const {currentPassword, newPassword, newPasswordVerify} = req.body;
-    const validationResult = validatePassword(newPassword, newPasswordVerify);
+    const {currentPassword, newPassword, newPasswordConfirmation} = req.body;
+    const validationResult = validateNewPassword(newPassword, newPasswordConfirmation);
 
     if (validationResult.valid === false) {
       return res.status(httpStatus.BAD_REQUEST).send({
@@ -54,14 +54,14 @@ export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl
     if (result === 401) {
       appLogger.info('auth / change - change - invalid currentPassword');
       return res.status(httpStatus.FORBIDDEN).send({
-        message: 'Nykyinen salasana on virheellinen'
+        message: 'Nykyinen salasana on väärin'
       });
     }
 
     if (result === 403) {
       appLogger.info('auth / change - change - aleph connection error');
       return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
-        message: 'Palvelun asetuksissa on ongelmia. Otathan yhteyttä melinda postiin, kiitos!'
+        message: 'Salasana-palvelussa on häiriö. Ota yhteyttä suoraan ylläpitoon ongelman ratkaisemiseksi.'
       });
     }
 
@@ -71,7 +71,7 @@ export function createAuthRouter(passport, jwtOptions, alephChangePasswordApiUrl
     }
 
     appLogger.info('auth / change - change - Unexpected error');
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message: 'Palvelun asetuksissa on ongelmia. Otathan yhteyttä melinda postiin, kiitos!'});
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message: 'Salasana-palvelussa on häiriö. Ota yhteyttä suoraan ylläpitoon ongelman ratkaisemiseksi.'});
 
     async function changePassword(id, currentPassword, newPassword) {
       const fetchOptions = {
