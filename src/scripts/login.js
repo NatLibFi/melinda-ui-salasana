@@ -1,44 +1,48 @@
 import {authGetBaseToken, authLogin} from '/scripts/callRest.js';
+import {hidePassword} from '/shared/scripts/form.js';
 import {startProcess, stopProcess} from '/shared/scripts/progressbar.js';
-import {eventHandled} from '/shared/scripts/uiUtils.js';
 import {showSnackbar} from '/shared/scripts/snackbar.js';
+import {eventHandled} from '/shared/scripts/uiUtils.js';
 
-window.initializeLogin = function () {
-  console.log('Initializing Login');
-
-  //disable back button
-  const goBackButton = document.getElementById('goBack');
-  if (goBackButton) {goBackButton.style.display = 'none';}
-
-  addFormHandlingEventListeners();
-};
-
-function addFormHandlingEventListeners() {
-  const loginForm = document.getElementById('login');
-  loginForm.addEventListener('submit', loginEvent);
+window.initialize = function () {
+  console.log('Initializing Cyrillux login');
+  addSubmitLoginFormEventListener();
 }
 
-async function loginEvent(event) {
-  console.log('Login submit event');
+function addSubmitLoginFormEventListener() {
+  const loginForm = document.getElementById('loginForm');
+  loginForm.addEventListener('submit', logIntoCyrillux);
+}
+
+async function logIntoCyrillux(event) {
+  console.log('Submit login form event: log into Cyrillux');
   eventHandled(event);
 
-  const termschecked = document.querySelector('#login #acceptterms').checked;
-  if (!termschecked) {
-    showSnackbar({style: 'error', text: 'Tietosuojaselosteen ja evästeiden käytön hyväksyminen vaaditaan'});
+  const passwordFormField = document.getElementById('passwordFormField');
+  hidePassword(passwordFormField);
 
+  const cookiesAndPrivacyNoticeConsent = document.getElementById('acceptTerms').checked;
+
+  if (!cookiesAndPrivacyNoticeConsent) {
+    console.log('User has to accept the terms (cookies and privacy notice) before logging into Melinda application');
+    showSnackbar({style: 'info', text: 'Tietosuojaselosteen ja evästeiden käytön hyväksyminen vaaditaan'});
     return;
   }
 
-  const form = document.getElementById('login');
-  const formData = new FormData(form);
-
   startProcess();
+
+  const loginForm = document.getElementById('loginForm');
+  const loginFormData = new FormData(loginForm);
+
   try {
-    const {token} = await authGetBaseToken({username: formData.get('username'), password: formData.get('password')});
+    const {token} = await authGetBaseToken({
+      username: loginFormData.get('loginUsername'),
+      password: loginFormData.get('loginPassword')
+    });
     await authLogin(token);
     location.reload();
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
     showSnackbar({style: 'error', text: 'Käyttäjätunnus tai salasana on väärin'});
   } finally {
     stopProcess();

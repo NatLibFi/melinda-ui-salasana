@@ -4,7 +4,7 @@ import {startProcess, stopProcess} from '/shared/scripts/progressbar.js';
 import {showSnackbar} from '/shared/scripts/snackbar.js';
 import {eventHandled} from '/shared/scripts/uiUtils.js';
 
-window.initializeSalasana = function () {
+window.initialize = function () {
   console.log('Initializing Salasana application');
   addFormHandlingEventListeners();
 };
