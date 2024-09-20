@@ -12,12 +12,13 @@ export function createMainViewRouter(passport) {
   const authHandler = createAuthHandler(passport);
 
   return new Router()
-    .get('/', authHandler({successRedirects: '/home', allowUnauthorized: true}), renderLogin)
-    .get('/home', authHandler({failureRedirects: '/'}), renderSalasana);
+    .get('/', authHandler({failureRedirects: '/login'}), renderSalasana)
+    .get('/login', authHandler({successRedirects: '/', allowUnauthorized: true}), renderLogin);
+
 
   function renderLogin(req, res) {
-    const renderedView = 'login';
-    const localVariable = {title: 'Kirjaudu | Salasana', location: {name: 'Kirjaudu', link: '/'}, onload: 'initializeLogin()'};
+    const renderedView = 'loginpage';
+    const localVariable = {title: 'Kirjaudu | Salasana', isLogin: true, onload: 'initialize()'};
 
     return res.render(renderedView, localVariable);
   }
@@ -25,7 +26,7 @@ export function createMainViewRouter(passport) {
   function renderSalasana(req, res) {
     const renderedView = 'salasana';
     const username = req.user.displayName || req.user.id || 'melinda-user';
-    const localVariable = {title: 'Vaihda salasana | Salasana', username, location: {name: 'Vaihda salasana', link: '/home'}, onload: 'initializeSalasana()'};
+    const localVariable = {title: 'Vaihda salasana | Salasana', username, onload: 'initialize()'};
 
     return res.render(renderedView, localVariable);
   }
