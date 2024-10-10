@@ -40,9 +40,9 @@
     "@natlibfi/melinda-ui-commons": "^5.0.0-alpha.13",
     "@natlibfi/passport-melinda-aleph": "^3.0.1",
     "@natlibfi/passport-melinda-jwt": "^2.0.0-alpha.4",
-    "cookie-parser": "^1.4.6",
+    "cookie-parser": "^1.4.7",
     "debug": "^4.3.4",
-    "express": "^4.19.2",
+    "express": "^4.21.1",
     "express-handlebars": "^7.1.2",
     "passport": "^0.7.0"
   },
