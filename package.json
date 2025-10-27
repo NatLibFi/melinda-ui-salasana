@@ -18,46 +18,37 @@
     "url": "https://github.com/NatLibFi/melinda-ui-salasana/issues"
   },
   "main": "src/index.js",
-  "engines": {
-    "node": ">=20"
-  },
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "build": "babel src --out-dir=dist --delete-dir-on-start --copy-files",
-    "dev": "DEBUG=@natlibfi/* nodemon",
+    "start": "node dist/index.js",
+    "prepare": "npm run build",
+    "build": "node build.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "npm run build",
-    "start": "node dist/index.js",
-    "test": "NODE_ENV=test mocha",
-    "test:dev": "NODE_ENV=test c8 mocha"
+    "test": "npm run lint",
+    "test:base": "node --test --test-force-exit --experimental-test-coverage --test-reporter=spec './src/*.test.mjs'",
+    "dev": "cross-env DEBUG=@natlibfi/* NODE_ENV=test node --watch --test --experimental-test-coverage --test-reporter=spec './src/*.test.mjs'"
   },
   "dependencies": {
-    "@babel/runtime": "^7.24.4",
-    "@natlibfi/melinda-backend-commons": "^2.2.6",
-    "@natlibfi/melinda-commons": "^13.0.12",
-    "@natlibfi/melinda-rest-api-client": "^5.0.3",
-    "@natlibfi/melinda-ui-commons": "^5.0.0-alpha.13",
-    "@natlibfi/passport-melinda-aleph": "^3.0.1",
-    "@natlibfi/passport-melinda-jwt": "^2.0.0-alpha.4",
-    "cookie-parser": "^1.4.6",
-    "debug": "^4.3.4",
+    "@natlibfi/melinda-backend-commons": "next",
+    "@natlibfi/melinda-commons": "next",
+    "@natlibfi/melinda-rest-api-client": "next",
+    "@natlibfi/melinda-ui-commons": "next",
+    "@natlibfi/passport-melinda-aleph": "next",
+    "@natlibfi/passport-melinda-jwt": "next",
+    "cookie-parser": "^1.4.7",
+    "debug": "^4.4.3",
     "express": "^4.19.2",
-    "express-handlebars": "^7.1.2",
+    "express-handlebars": "^8.0.3",
     "passport": "^0.7.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.1",
-    "@babel/core": "^7.24.4",
-    "@babel/preset-env": "^7.24.4",
-    "@babel/register": "^7.23.7",
-    "@natlibfi/eslint-config-melinda-frontend": "^2.0.2",
-    "@natlibfi/fixugen": "^2.0.4",
-    "@natlibfi/fixura": "^3.0.4",
-    "c8": "^9.1.0",
-    "chai": "^5.1.0",
-    "eslint": "^8.57.0",
-    "mocha": "^10.4.0",
-    "nodemon": "^3.1.0"
+    "@natlibfi/fixugen": "next",
+    "@natlibfi/fixura": "next",
+    "esbuild": "^0.25.11",
+    "eslint": "^9.38.0"
   }
 }

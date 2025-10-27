@@ -1,4 +1,4 @@
-import {authGetBaseToken, authLogin} from '/scripts/callRest.js';
+import {authGetBaseToken, authLogin} from '/scripts/callRest.mjs';
 import {hidePassword} from '/shared/scripts/form.js';
 import {startProcess, stopProcess} from '/shared/scripts/progressbar.js';
 import {showSnackbar} from '/shared/scripts/snackbar.js';
@@ -7,7 +7,7 @@ import {eventHandled} from '/shared/scripts/uiUtils.js';
 window.initialize = function () {
   console.log('Initializing Cyrillux login');
   addSubmitLoginFormEventListener();
-}
+};
 
 function addSubmitLoginFormEventListener() {
   const loginForm = document.getElementById('loginForm');

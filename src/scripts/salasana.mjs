@@ -1,4 +1,4 @@
-import {changePassword} from '/scripts/callRest.js';
+import {changePassword} from '/scripts/callRest.mjs';
 import {disableElement, enableElement} from '/shared/scripts/elements.js';
 import {startProcess, stopProcess} from '/shared/scripts/progressbar.js';
 import {showSnackbar} from '/shared/scripts/snackbar.js';
@@ -29,7 +29,7 @@ async function handleFormSubmit(event) {
     currentPassword: formData.get('currentPassword'),
     newPassword: formData.get('newPassword'),
     newPasswordConfirmation: formData.get('newPasswordConfirmation')
-  }
+  };
 
   disableElement(submitButton);
 
