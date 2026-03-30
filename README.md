@@ -23,6 +23,6 @@ In local dev VPN must be on or login does not work `HTTP GET /rest/auth/login - 
 
 ## License and copyright
 
-Copyright (C) 2024 University Of Helsinki (The National Library Of Finland)
+Copyright (C) 2024-2026 University Of Helsinki (The National Library Of Finland)
 
 This project's source code is licensed under the terms of **MIT** or any later version.
